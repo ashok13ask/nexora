@@ -94,7 +94,7 @@ const Login = () => {
                     className={classnames({
                       "input-group-focus": state.passFocus,
                     })}
-                  >
+                   >
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
                         <i className="tim-icons icon-lock-circle" />

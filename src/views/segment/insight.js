@@ -13,22 +13,17 @@ import {
 const Insight = () => {
   return (
     <div className="content">
-      <div className="d-flex justify-content-between">
-        <div className="d-flex">
-          <h4>Create Segment</h4>
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
+        {/* Title - full width on mobile, left-aligned on desktop */}
+        <div className="col-12 col-md-auto mb-2 mb-md-0 text-center text-md-start">
+          <h4 className="mb-0">Create Segment</h4>
         </div>
-        <div className="d-flex">
-          <Input
-            type="text"
-            className="mr-3"
-            placeholder="Type something...."
-          />
-          <Button
-            color="info"
-            disabled
-            style={{ width: "200px", fontSize: "10px", padding: "10px" }}
-          >
-            Save segment
+
+        <div className="d-flex col-md-12 col-lg-6 align-items-center">
+          <Input type="text" placeholder="Type something..." />
+          <Button className="btn btn-info w-50">
+            <span className="d-none d-md-inline">save segment</span>
+            <span className="d-inline d-md-none">save</span>
           </Button>
         </div>
       </div>
@@ -39,17 +34,19 @@ const Insight = () => {
               <Row>
                 <Col className="text-left" sm="12">
                   <CardTitle>
-                    <div className="d-flex justify-content-between w-100">
-                      <div>
+                    <div className="d-flex flex-column flex-md-row justify-content-between w-100 gap-2">
+                      <div className="text-center text-md-start">
                         <h3 className="mb-1">Past Behavior Segment</h3>
-                        <h5 className="mb-0">
-                          Segment users try property, past behavior and interest
+                        <h5 className="mb-0 text-muted">
+                          Segment users by property, past behavior and interest
                         </h5>
                       </div>
 
-                      <h6 className="mb-0 align-self-center">
-                        Change Segment Type
-                      </h6>
+                      <div className="d-flex align-items-center justify-content-center justify-content-md-end">
+                        <h6 className="mb-0 text-primary cursor-pointer">
+                          Change Segment Type
+                        </h6>
+                      </div>
                     </div>
                   </CardTitle>
                   <hr />

@@ -45,6 +45,11 @@ import Lock from "views/pages/Lock.js";
 import Insight from "views/segment/insight";
 import RFM from "views/segment/rfm";
 import SegmentList from "views/segment/segmentList";
+import Campaigns from "views/campaigns";
+import Events from "views/Analytics/Event";
+import FindPeople from "views/segment/findPeople";
+import CreateEvent from "views/Analytics/Event/newEvent";
+import PushNotification from "views/campaigns/pushNotification";
 
 const routes = [
   {
@@ -62,9 +67,56 @@ const routes = [
     state: "mapCollapse",
     views: [
       {
-        // collapse: true,
+        collapse: true,
         name: "Analytics",
         mini: "A",
+        state: "analyticsCollapse",
+        views: [
+          {
+            name: "Events",
+            path: "#",
+            layout: "/admin",
+            mini: "E",
+            path: "/analytics/event",
+            component: <Events />,
+          },
+          // {
+          //   name: "Funnels",
+          //   path: "#",
+          //   layout: "/admin",
+          //   mini: "F",
+          // },
+          // {
+          //   name: "Cohorts",
+          //   path: "#",
+          //   layout: "/admin",
+          //   mini: "C",
+          // },
+          // {
+          //   name: "Trends",
+          //   path: "#",
+          //   layout: "/admin",
+          //   mini: "T",
+          // },
+          // {
+          //   name: "Pivots",
+          //   path: "#",
+          //   layout: "/admin",
+          //   mini: "P",
+          // },
+          // {
+          //   name: "Flows",
+          //   path: "#",
+          //   layout: "/admin",
+          //   mini: "F",
+          // },
+          // {
+          //   name: "Real Impact",
+          //   path: "#",
+          //   layout: "/admin",
+          //   mini: "E",
+          // },
+        ],
       },
 
       {
@@ -78,20 +130,21 @@ const routes = [
             path: "/segment/segmentList",
             layout: "/admin",
             mini: "S",
-            component:<SegmentList/>
+            component: <SegmentList />,
           },
           {
             name: "RFM",
             path: "/segment/rfm",
             layout: "/admin",
             mini: "R",
-            component:<RFM/>
+            component: <RFM />,
           },
           {
             name: "Find People",
-            path: "#",
+            path: "/segment/find-people",
             layout: "/admin",
             mini: "FP",
+            component: <FindPeople />,
           },
         ],
       },
@@ -107,7 +160,8 @@ const routes = [
         name: "Campaigns",
         mini: "C",
         layout: "/admin",
-        path: "#",
+        path: "/campaigns",
+        component: <Campaigns />,
       },
       {
         name: "Journeys",
@@ -236,6 +290,24 @@ const routes = [
         layout: "/admin",
       },
       {
+        path: "/analytics/event/create",
+        name: "Create Event",
+        rtlName: "وصفت",
+        mini: "CE",
+        rtlMini: "ب",
+        component: <CreateEvent />,
+        layout: "/admin",
+      },
+      {
+        path: "/campaigns/new/push",
+        name: "Push Notification",
+        rtlName: "وصفت",
+        mini: "PN",
+        rtlMini: "ب",
+        component: <PushNotification />,
+        layout: "/admin",
+      },
+      {
         path: "/grid-system",
         name: "Grid System",
         rtlName: "نظام الشبكة",
@@ -343,7 +415,7 @@ const routes = [
     rtlName: "الجداول",
     icon: "tim-icons icon-puzzle-10",
     state: "tablesCollapse",
-    // invisible: true,
+    invisible: true,
     views: [
       {
         path: "/regular-tables",
@@ -380,7 +452,7 @@ const routes = [
     rtlName: "خرائط",
     icon: "tim-icons icon-pin",
     state: "mapsCollapse",
-    // invisible: true,
+    invisible: true,
     views: [
       {
         path: "/google-maps",
@@ -417,6 +489,7 @@ const routes = [
     rtlName: "الحاجيات",
     icon: "tim-icons icon-settings",
     component: <Widgets />,
+    invisible: true,
     layout: "/admin",
   },
   {
