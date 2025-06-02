@@ -50,6 +50,8 @@ import Events from "views/Analytics/Event";
 import FindPeople from "views/segment/findPeople";
 import CreateEvent from "views/Analytics/Event/newEvent";
 import PushNotification from "views/campaigns/pushNotification";
+import Journey from "views/Journey";
+import SMS from "views/campaigns/sms";
 
 const routes = [
   {
@@ -166,9 +168,17 @@ const routes = [
       {
         name: "Journeys",
         mini: "J",
-        path: "#",
+        path: "/Journey",
         layout: "/admin",
+        component: <Journey />,
       },
+      //  {
+      //   name: "Grid",
+      //   mini: "G",
+      //   path: "/grid",
+      //   layout: "/admin",
+      //   component: <Grid />,
+      // },
     ],
   },
   {
@@ -307,6 +317,16 @@ const routes = [
         component: <PushNotification />,
         layout: "/admin",
       },
+      {
+        path: "/campaigns/new/sms",
+        name: "SMS",
+        rtlName: "وصفت",
+        mini: "S",
+        rtlMini: "ب",
+        component: <SMS />,
+        layout: "/admin",
+      },
+      ,
       {
         path: "/grid-system",
         name: "Grid System",

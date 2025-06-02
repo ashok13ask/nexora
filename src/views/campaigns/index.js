@@ -9,7 +9,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  CardTitle,
   Col,
   Dropdown,
   DropdownItem,
@@ -192,10 +191,14 @@ const Campaigns = () => {
                       >
                         Push Notifications
                       </DropdownItem>
+                      <DropdownItem
+                        onClick={() => navigate("/admin/campaigns/new/sms")}
+                      >
+                        SMS
+                      </DropdownItem>
                       <DropdownItem>In-App Messages</DropdownItem>
                       <DropdownItem>App Inbox</DropdownItem>
                       <DropdownItem>Native Display</DropdownItem>
-                      <DropdownItem>SMS</DropdownItem>
                       <DropdownItem>Email</DropdownItem>
                       <DropdownItem>WhatsApp</DropdownItem>
                       <DropdownItem>Web Inbox</DropdownItem>
