@@ -39930,6 +39930,13 @@ body:not(.white-content) .custom-select option {
   color: #ffffff;
 }
 
+.hoverable-element {
+  cursor: pointer;
+}
+.hoverable-element:hover {
+  color: pink;
+}
+
 
 
 

@@ -52,6 +52,8 @@ import CreateEvent from "views/Analytics/Event/newEvent";
 import PushNotification from "views/campaigns/pushNotification";
 import Journey from "views/Journey";
 import SMS from "views/campaigns/sms";
+import AllUsers from "views/segment/PastBehavior/allUsers";
+import FirstTime from "views/segment/liveSegment/firstTime";
 
 const routes = [
   {
@@ -76,7 +78,6 @@ const routes = [
         views: [
           {
             name: "Events",
-            path: "#",
             layout: "/admin",
             mini: "E",
             path: "/analytics/event",
@@ -326,7 +327,6 @@ const routes = [
         component: <SMS />,
         layout: "/admin",
       },
-      ,
       {
         path: "/grid-system",
         name: "Grid System",
@@ -526,6 +526,21 @@ const routes = [
     rtlName: "التقويم",
     icon: "tim-icons icon-time-alarm",
     component: <Calendar />,
+    layout: "/admin",
+  },
+  {
+    path: "/past-behavior/all-users",
+    name: "All User",
+    rtlName: "التقويم",
+    icon: "tim-icons icon-time-alarm",
+    component: <AllUsers />,
+    layout: "/admin",
+  }, {
+    path: "/live-segment/app-launch",
+    name: "First Time App Launch",
+    rtlName: "التقويم",
+    icon: "tim-icons icon-time-alarm",
+    component: <FirstTime />,
     layout: "/admin",
   },
 ];

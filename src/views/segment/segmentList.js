@@ -11,6 +11,10 @@ import {
   Col,
   FormGroup,
   Input,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
   Row,
   Table,
 } from "reactstrap";
@@ -23,6 +27,9 @@ const SegmentList = () => {
       key: "selection",
     },
   ]);
+  const [modal, setModal] = React.useState(false);
+
+  const toggle = () => setModal(!modal);
   const navigate = useNavigate();
   const pickerRef = React.useRef(null);
 
@@ -56,6 +63,63 @@ const SegmentList = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showPicker]);
+  const args = {
+    className: "my-custom-modal",
+    backdrop: "static",
+    size: "xl",
+  };
+
+  const segmentOptions = [
+    {
+      title: "Past Behavior Segment",
+      desc: "Segment users by property, past behavior, and interest",
+      icon: "📘", // replace with actual icon or SVG
+      color: "#E0F2FF",
+      onclick:()=>{navigate('/admin/segment/insight')}
+    },
+    {
+      title: "Live - User Actions",
+      desc: "Add users to segment when they do one or many events",
+      icon: "🔧",
+      color: "#E7FFF3",
+    },
+    {
+      title: "Live - Inaction in Time Frame",
+      desc: "Add users who do only one of two events in set time frame",
+      icon: "🛑",
+      color: "#E7FFF3",
+    },
+    {
+      title: "Live - On a Date or Time",
+      desc: "Add users to segment based on date or time",
+      icon: "📅",
+      color: "#E7FFF3",
+    },
+    {
+      title: "Live - Page Visit",
+      desc: "Add users to segment when they visit a specific page",
+      icon: "🌐",
+      color: "#F0E7FF",
+    },
+    {
+      title: "Live - Referrer Entry",
+      desc: "Add users to segment when referred by a website or campaign",
+      icon: "🔗",
+      color: "#E7FFF3",
+    },
+    {
+      title: "Live - Page Count",
+      desc: "Add users to segment based on count of pages visited",
+      icon: "📄",
+      color: "#E7FFF3",
+    },
+    {
+      title: "Custom - List Based",
+      desc: "Upload custom user list to create segment",
+      icon: "📁",
+      color: "#F3E6FF",
+    },
+  ];
   return (
     <div className="content">
       <h2>Segment</h2>
@@ -76,7 +140,7 @@ const SegmentList = () => {
             style={{ cursor: "pointer", color: "inherit" }}
           />
           {showPicker && (
-            <div >
+            <div>
               <DateRange
                 ranges={range}
                 onChange={handleSelect}
@@ -112,10 +176,7 @@ const SegmentList = () => {
               {/* Button group - moves below on small screens */}
               <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
                 <p className="mr-3 mb-0">Running Goals : 0/5</p>
-                <Button
-                  color="info"
-                  onClick={() => navigate("/admin/segment/insight")}
-                >
+                <Button color="info" onClick={() => setModal(true)}>
                   <i className="tim-icons icon-simple-add" />
                   <span className="d-none d-md-inline"> Segment</span>
                 </Button>
@@ -256,6 +317,45 @@ const SegmentList = () => {
           </Card>
         </Col>
       </Row>
+      <Modal isOpen={modal} toggle={toggle} {...args}>
+        <ModalHeader toggle={toggle}>
+          <span className="h3 mb-0">Create Segment</span>
+        </ModalHeader>
+        <ModalBody>
+          <Row>
+            {segmentOptions.map((option, idx) => (
+              <Col md="4" className="mb-1" key={idx}>
+                <Card
+                  style={{
+                    cursor: "pointer",
+                    borderRadius: "10px",
+                    backgroundColor: "#F9FAFB",
+                    boxShadow: "0 2px 5px rgba(0,0,0,0.05)",
+                  }}
+                  onClick={option?.onclick}
+                >
+                  <CardBody className="d-flex align-items-start gap-3">
+                    <div
+                      style={{
+                        backgroundColor: option.color,
+                        padding: "10px",
+                        borderRadius: "8px",
+                        fontSize: "20px",
+                      }}
+                    >
+                      {option.icon}
+                    </div>
+                    <div>
+                      <span className="h4 mb-1">{option.title}</span>
+                      <p className="text-muted small mb-0">{option.desc}</p>
+                    </div>
+                  </CardBody>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </ModalBody>
+      </Modal>
     </div>
   );
 };

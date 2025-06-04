@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Badge,
   Button,
   Card,
   CardBody,
@@ -7,10 +8,53 @@ import {
   CardTitle,
   Col,
   Input,
+  Modal,
+  ModalBody,
+  ModalHeader,
   Row,
 } from "reactstrap";
 
 const Insight = () => {
+  const [modal, setModal] = React.useState(false);
+
+  const toggle = () => setModal(!modal);
+  const ruleCategories = [
+    {
+      title: "USER PROPERTY",
+      color: "#007bff",
+      rules: [
+        "User property",
+        "User Bucket",
+        "Demographics",
+        "Geography",
+        "Geography Radius",
+        "Technographics",
+        "Reachability",
+        "App Fields",
+        "Segments",
+        "Subscription Groups",
+      ],
+    },
+    {
+      title: "USER BEHAVIOR",
+      color: "#007bff",
+      rules: [
+        "Event (Did)",
+        "Event (Have Not Done)",
+        "Event Combination (Did Any Of)",
+      ],
+    },
+    {
+      title: "USER INTERESTS",
+      color: "#007bff",
+      rules: ["Event property", "Time of the day", "Day of the week"],
+    },
+  ];
+  const args = {
+    className: "my-custom-modal",
+    backdrop: "static",
+    size: "xl",
+  };
   return (
     <div className="content">
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
@@ -51,15 +95,29 @@ const Insight = () => {
                   </CardTitle>
                   <hr />
                   <CardBody>
-                    <div
+                    {/* <div
                       style={{
                         border: "1px solid #ccc",
                         padding: "30px",
                         borderRadius: "5px",
                       }}
                     >
-                      <p>Add Rule</p>
-                    </div>
+                      <p
+                        onClick={() => setModal(true)}
+                        className="text-primary mb-0"
+                        style={{ cursor: "pointer" }}
+                      >
+                        Add Rule
+                      </p>
+                    </div> */}
+                    <Badge
+                      color="info"
+                      className="p-2"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => setModal(true)}
+                    >
+                      Add Rule
+                    </Badge>
                   </CardBody>
                 </Col>
               </Row>
@@ -206,6 +264,37 @@ const Insight = () => {
       </Row>
 
       <h3>Sample User</h3>
+
+      <Modal isOpen={modal} toggle={toggle} size="lg" {...args}>
+        <ModalHeader toggle={toggle}>
+          <h4 className="mb-0">Choose a rule</h4>
+        </ModalHeader>
+        <ModalBody>
+          <Row>
+            {ruleCategories.map((cat, i) => (
+              <Col md="4" key={i}>
+                <span
+                  className="h6"
+                  style={{ color: cat.color, fontWeight: "bold" }}
+                >
+                  {cat.title}
+                </span>
+                <ul className="list-unstyled mt-2 ">
+                  {cat.rules.map((rule, j) => (
+                    <li
+                      key={j}
+                      className="mb-2 text-dark"
+                      style={{ cursor: "pointer" }}
+                    >
+                      {rule}
+                    </li>
+                  ))}
+                </ul>
+              </Col>
+            ))}
+          </Row>
+        </ModalBody>
+      </Modal>
     </div>
   );
 };
