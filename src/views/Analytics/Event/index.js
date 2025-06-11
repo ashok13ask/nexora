@@ -8,7 +8,6 @@ import {
   CardBody,
   CardHeader,
   Col,
-  Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
@@ -18,8 +17,6 @@ import {
 } from "reactstrap";
 
 const Events = () => {
-  const [dropdownOpen, setDropdownOpen] = React.useState(false);
-  const toggle = () => setDropdownOpen(!dropdownOpen);
   const navigate = useNavigate();
   return (
     <div className="content">

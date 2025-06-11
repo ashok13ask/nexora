@@ -47,13 +47,15 @@ import RFM from "views/segment/rfm";
 import SegmentList from "views/segment/segmentList";
 import Campaigns from "views/campaigns";
 import Events from "views/Analytics/Event";
-import FindPeople from "views/segment/findPeople";
 import CreateEvent from "views/Analytics/Event/newEvent";
 import PushNotification from "views/campaigns/pushNotification";
 import Journey from "views/Journey";
 import SMS from "views/campaigns/sms";
 import AllUsers from "views/segment/PastBehavior/allUsers";
 import FirstTime from "views/segment/liveSegment/firstTime";
+import CustomerList from "views/Customer/CustomerList";
+import CustomerProfile from "views/Customer";
+import FindPeople from "views/segment/FindPeople";
 
 const routes = [
   {
@@ -126,7 +128,7 @@ const routes = [
         name: "Segments",
         mini: "S",
         collapse: true,
-        state: "analyticsCollapse", // Add a unique state
+        state: "segmentCollapse", // Add a unique state
         views: [
           {
             name: "Segment",
@@ -181,6 +183,14 @@ const routes = [
       //   component: <Grid />,
       // },
     ],
+  },
+  {
+    path: "/customer-list",
+    name: "Customer",
+    rtlName: "الرسوم البيانية",
+    icon: "tim-icons icon-single-02",
+    component: <CustomerList />,
+    layout: "/admin",
   },
   {
     collapse: true,
@@ -518,6 +528,7 @@ const routes = [
     rtlName: "الرسوم البيانية",
     icon: "tim-icons icon-chart-bar-32",
     component: <Charts />,
+    invisible: true,
     layout: "/admin",
   },
   {
@@ -526,22 +537,33 @@ const routes = [
     rtlName: "التقويم",
     icon: "tim-icons icon-time-alarm",
     component: <Calendar />,
+    invisible: true,
     layout: "/admin",
   },
   {
     path: "/past-behavior/all-users",
     name: "All User",
     rtlName: "التقويم",
-    icon: "tim-icons icon-time-alarm",
+    icon: "bi bi-person-circle",
     component: <AllUsers />,
     layout: "/admin",
-  }, {
+    // invisible: true,
+  },
+  {
     path: "/live-segment/app-launch",
     name: "First Time App Launch",
     rtlName: "التقويم",
-    icon: "tim-icons icon-time-alarm",
+    icon: "bi bi-hourglass-split",
     component: <FirstTime />,
     layout: "/admin",
+    // invisible: true,
+  },
+  {
+    path: "/customer-detail",
+    component: <CustomerProfile />,
+    invisible: true,
+    layout: "/admin",
+    name: "Customer Detail",
   },
 ];
 

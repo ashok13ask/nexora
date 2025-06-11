@@ -18,6 +18,8 @@ import {
   Row,
   UncontrolledDropdown,
 } from "reactstrap";
+ 
+
 
 const Journey = () => {
   const [range, setRange] = React.useState([
@@ -213,22 +215,7 @@ const Journey = () => {
                     Control group
                   </label>
                   <select
-                    className="form-select"
-                    style={{
-                      backgroundColor: "#f0f0f8", // soft grayish blue
-                      border: "none",
-                      borderRadius: "8px",
-                      padding: "6px 12px",
-                      color: "#3c3c58",
-                      fontWeight: 500,
-                      minWidth: "200px",
-                      appearance: "none", // removes native arrow for custom look
-                      backgroundImage:
-                        "url(\"data:image/svg+xml;charset=UTF-8,%3Csvg fill='%233c3c58' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E\")",
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "right 10px center",
-                      backgroundSize: "16px 16px",
-                    }}
+                    id="custom-select"
                   >
                     <option value="system">System</option>
                     <option value="manual">Manual</option>

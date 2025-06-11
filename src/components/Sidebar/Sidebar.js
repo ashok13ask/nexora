@@ -115,7 +115,6 @@ const Sidebar = (props) => {
                 </>
               ) : (
                 <>
-                  {/* <p>hello</p> */}
                   <span className="sidebar-mini-icon">
                     {rtlActive ? prop.rtlMini : prop.mini}
                   </span>

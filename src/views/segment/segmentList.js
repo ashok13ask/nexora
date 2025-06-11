@@ -128,7 +128,7 @@ const SegmentList = () => {
           style={{
             borderRadius: "10px",
           }}
-          className="col-lg-4"
+          className="col-lg-4 p-0"
           ref={pickerRef}
         >
           <Input
