@@ -52,6 +52,7 @@ import {
   chartExample3,
   chartExample4,
 } from "variables/charts.js";
+import { useActiveColor } from "context/activeColor";
 
 var mapData = {
   AU: 760,
@@ -68,6 +69,7 @@ var mapData = {
 };
 
 const Dashboard = () => {
+  const { ActiveThemeColor } = useActiveColor();
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
@@ -90,7 +92,7 @@ const Dashboard = () => {
                       data-toggle="buttons"
                     >
                       <Button
-                        color="info"
+                        color={ActiveThemeColor}
                         id="0"
                         size="sm"
                         tag="label"
@@ -107,7 +109,7 @@ const Dashboard = () => {
                         </span>
                       </Button>
                       <Button
-                        color="info"
+                        color={ActiveThemeColor}
                         id="1"
                         size="sm"
                         tag="label"
@@ -124,7 +126,7 @@ const Dashboard = () => {
                         </span>
                       </Button>
                       <Button
-                        color="info"
+                        color={ActiveThemeColor}
                         id="2"
                         size="sm"
                         tag="label"
@@ -174,7 +176,7 @@ const Dashboard = () => {
               <CardFooter>
                 <hr />
                 <div className="stats">
-                  <i className="tim-icons icon-refresh-01" /> 
+                  <i className="tim-icons icon-refresh-01" />
                   Total Users
                 </div>
               </CardFooter>

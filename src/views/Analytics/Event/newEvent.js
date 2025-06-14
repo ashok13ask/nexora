@@ -1,3 +1,4 @@
+import { useActiveColor } from "context/activeColor";
 import React from "react";
 import { FaPlus } from "react-icons/fa";
 import {
@@ -14,6 +15,7 @@ import {
 } from "reactstrap";
 
 const CreateEvent = () => {
+  const { ActiveThemeColor } = useActiveColor();
   return (
     <div className="content">
       <div className="col-12 col-md-4">
@@ -78,7 +80,7 @@ const CreateEvent = () => {
             <CardBody>
               <h1 className="mt-4">70,898</h1>
               <p>Event Found</p>
-              <Button color="info">View Details</Button>
+              <Button color={ActiveThemeColor}>View Details</Button>
             </CardBody>
           </Card>
           <Card>

@@ -1,3 +1,4 @@
+import { useActiveColor } from "context/activeColor";
 import React from "react";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -17,13 +18,14 @@ import {
 } from "reactstrap";
 
 const Events = () => {
+  const { ActiveThemeColor } = useActiveColor();
   const navigate = useNavigate();
   return (
     <div className="content">
       <div className="d-flex align-items-center justify-content-between mb-3">
         <h4>Event</h4>
         <Button
-          color="info"
+          color={ActiveThemeColor}
           onClick={() => navigate("/admin/analytics/event/create")}
         >
           <FaPlus className="me-2" />
@@ -154,7 +156,7 @@ const Events = () => {
               <h3>5%</h3>
               <p>Users did 'Charged' between</p>
               <h5>22:00 to 23:00</h5>
-              <button className="btn btn-info">
+              <button className={`btn btn-${ActiveThemeColor}`}>
                 View time of the day details
               </button>
               <p>For the seelected time period and event query</p>
@@ -167,7 +169,9 @@ const Events = () => {
               <h3>30%</h3>
               <p>Users did 'Charged'</p>
               <h5>More the one time</h5>
-              <button className="btn btn-info">View frequency details</button>
+              <button className={`btn btn-${ActiveThemeColor}`}>
+                View frequency details
+              </button>
               <p>For the seelected time period and event query</p>
             </CardBody>
           </Card>

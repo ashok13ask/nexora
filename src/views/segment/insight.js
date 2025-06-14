@@ -1,3 +1,6 @@
+import SegmentTypeModal from "components/Modals/segmentTypeModal";
+import { useActiveColor } from "context/activeColor";
+import { useSegmentContext } from "context/SegementContext";
 import React from "react";
 import {
   Badge,
@@ -15,6 +18,8 @@ import {
 } from "reactstrap";
 
 const Insight = () => {
+  const { ActiveThemeColor } = useActiveColor();
+  const { setSegmentModal } = useSegmentContext();
   const [modal, setModal] = React.useState(false);
 
   const toggle = () => setModal(!modal);
@@ -65,7 +70,7 @@ const Insight = () => {
 
         <div className="d-flex col-md-12 col-lg-6 align-items-center">
           <Input type="text" placeholder="Type something..." />
-          <Button className="btn btn-info w-50">
+          <Button className={`btn btn-${ActiveThemeColor} w-50`}>
             <span className="d-none d-md-inline">save segment</span>
             <span className="d-inline d-md-none">save</span>
           </Button>
@@ -87,31 +92,20 @@ const Insight = () => {
                       </div>
 
                       <div className="d-flex align-items-center justify-content-center justify-content-md-end">
-                        <h6 className="mb-0 text-primary cursor-pointer">
+                        <Button
+                          color={ActiveThemeColor}
+                          onClick={() => setSegmentModal(true)}
+                          className="btn-link"
+                        >
                           Change Segment Type
-                        </h6>
+                        </Button>
                       </div>
                     </div>
                   </CardTitle>
                   <hr />
                   <CardBody>
-                    {/* <div
-                      style={{
-                        border: "1px solid #ccc",
-                        padding: "30px",
-                        borderRadius: "5px",
-                      }}
-                    >
-                      <p
-                        onClick={() => setModal(true)}
-                        className="text-primary mb-0"
-                        style={{ cursor: "pointer" }}
-                      >
-                        Add Rule
-                      </p>
-                    </div> */}
                     <Badge
-                      color="info"
+                      color={ActiveThemeColor}
                       className="p-2"
                       style={{ cursor: "pointer" }}
                       onClick={() => setModal(true)}
@@ -295,6 +289,7 @@ const Insight = () => {
           </Row>
         </ModalBody>
       </Modal>
+      <SegmentTypeModal />
     </div>
   );
 };

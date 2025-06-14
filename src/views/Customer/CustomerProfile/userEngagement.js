@@ -4,6 +4,7 @@ import React from "react";
 import { DateRange } from "react-date-range";
 import { FaSearch } from "react-icons/fa";
 import {
+  Card,
   Col,
   FormGroup,
   Input,
@@ -157,38 +158,33 @@ const UserEngagement = () => {
   ];
   return (
     <React.Fragment>
-      <FormGroup>
-        <div
-          style={{
-            borderRadius: "10px",
-          }}
-          className="col-lg-4 p-0 mt-4"
-          ref={pickerRef}
-        >
-          <Input
-            type="text"
-            value={formattedRange}
-            readOnly
-            onClick={() => setShowPicker(!showPicker)}
-            className="date-range-input"
-            style={{ cursor: "pointer", color: "inherit" }}
-          />
-          {showPicker && (
-            <div>
-              <DateRange
-                ranges={range}
-                onChange={handleSelect}
-                locale={enUS}
-                moveRangeOnFirstSelection={false}
-                editableDateInputs={true}
-              />
-            </div>
-          )}
-        </div>
-      </FormGroup>
-      <hr id="hrLine" />
       <Row>
-        <Col className="col-6 d-flex">
+        <Col>
+          <FormGroup>
+            <div className="col-lg-6 p-0" ref={pickerRef}>
+              <Input
+                type="text"
+                value={formattedRange}
+                readOnly
+                onClick={() => setShowPicker(!showPicker)}
+                className="date-range-input"
+                style={{ cursor: "pointer", color: "inherit" }}
+              />
+              {showPicker && (
+                <div>
+                  <DateRange
+                    ranges={range}
+                    onChange={handleSelect}
+                    locale={enUS}
+                    moveRangeOnFirstSelection={false}
+                    editableDateInputs={true}
+                  />
+                </div>
+              )}
+            </div>
+          </FormGroup>
+        </Col>
+        <Col className="d-flex justify-content-end">
           <div ref={wrapperRef}>
             <InputGroup>
               <InputGroupAddon addonType="prepend">
@@ -212,6 +208,7 @@ const UserEngagement = () => {
           </div>
         </Col>
       </Row>
+      <Card className="px-5 pt-3">
         <Table responsive>
           <thead>
             <tr>
@@ -232,6 +229,7 @@ const UserEngagement = () => {
             ))}
           </tbody>
         </Table>
+      </Card>
     </React.Fragment>
   );
 };

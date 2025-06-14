@@ -17,8 +17,8 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 
-import AuthNavbar from "components/Navbars/AuthNavbar.js";
-import Footer from "components/Footer/Footer.js";
+// import AuthNavbar from "components/Navbars/AuthNavbar.js";
+// import Footer from "components/Footer/Footer.js";
 
 import routes from "routes.js";
 

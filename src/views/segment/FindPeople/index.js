@@ -1,3 +1,4 @@
+import { useActiveColor } from "context/activeColor";
 import React from "react";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import {
@@ -12,6 +13,7 @@ import {
 } from "reactstrap";
 
 const FindPeople = () => {
+  const { ActiveThemeColor } = useActiveColor();
   return (
     <div className="content">
       <Row className="mt-3">
@@ -26,7 +28,11 @@ const FindPeople = () => {
                 <p>By interest</p>
                 <div id="hrLine" className="p-4">
                   <h4>Users Who like</h4>
-                  <Button size="sm" className="btn-simple" color="twitter">
+                  <Button
+                    size="sm"
+                    className="btn-simple"
+                    color={ActiveThemeColor}
+                  >
                     <FaPlus /> Interest
                   </Button>
                 </div>
@@ -35,7 +41,11 @@ const FindPeople = () => {
                 <p>AND by behavior</p>
                 <div id="hrLine" className="p-4">
                   <h4>Users Who did</h4>
-                  <Button size="sm" className="btn-simple" color="twitter">
+                  <Button
+                    size="sm"
+                    className="btn-simple"
+                    color={ActiveThemeColor}
+                  >
                     <FaPlus /> Event
                   </Button>
                 </div>
@@ -44,7 +54,11 @@ const FindPeople = () => {
                 <p>AND</p>
                 <div id="hrLine" className="p-4">
                   <h4>Did not do</h4>
-                  <Button size="sm" className="btn-simple" color="twitter">
+                  <Button
+                    size="sm"
+                    className="btn-simple"
+                    color={ActiveThemeColor}
+                  >
                     <FaPlus /> Event
                   </Button>
                 </div>
@@ -53,14 +67,18 @@ const FindPeople = () => {
                 <p>AND</p>
                 <div id="hrLine" className="p-4">
                   <h4>Display common property such as</h4>
-                  <Button size="sm" className="btn-simple" color="twitter">
+                  <Button
+                    size="sm"
+                    className="btn-simple"
+                    color={ActiveThemeColor}
+                  >
                     <FaPlus /> Property
                   </Button>
                 </div>
               </div>
             </CardBody>
             <CardFooter>
-              <Button size="sm" color="info">
+              <Button size="sm" color={ActiveThemeColor}>
                 View details
               </Button>
             </CardFooter>
@@ -74,7 +92,7 @@ const FindPeople = () => {
               <Input type="text" placeholder="_linuxoft@login3344" />
               <Button
                 size="sm"
-                color="info"
+                color={ActiveThemeColor}
                 className="d-flex mt-3 align-items-center"
               >
                 <FaSearch />

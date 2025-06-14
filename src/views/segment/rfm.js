@@ -6,7 +6,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  CardTitle,
   Col,
   FormGroup,
   Input,
@@ -116,18 +115,18 @@ const RFM = () => {
                     <option value="option3">Option 3</option>
                   </Input>
                 </FormGroup>
-                <a className="link">
+                {/* <a className="link">
                   <i className="fa fa-plus" style={{ marginRight: "6px" }}></i>{" "}
                   Filter By
-                </a>
+                </a> */}
               </div>
               <FormGroup check className="text-left gap-2 d-flex flex-column">
                 <Label check style={{ marginTop: "20px" }}>
                   <Input type="checkbox" />
                   <span className="form-check-sign" />
-                  <a href="#" style={{ fontSize: "10px" }}>
+                  {/* <a href="#" style={{ fontSize: "10px" }}>
                     Add Mondary Event
-                  </a>
+                  </a> */}
                 </Label>
                 <Label style={{ marginTop: "20px" }}>Choose Option</Label>
                 <Input

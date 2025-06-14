@@ -1,3 +1,4 @@
+import { useActiveColor } from "context/activeColor";
 import React from "react";
 import { FaEye, FaPlus, FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +22,7 @@ import {
 } from "reactstrap";
 
 const CustomerList = () => {
+  const { ActiveThemeColor } = useActiveColor();
   const wrapperRef = React.useRef(null);
 
   const navigate = useNavigate();
@@ -111,7 +113,7 @@ const CustomerList = () => {
           </div>
         </Col>
         <Col className="col-md-3 ml-auto d-flex justify-content-end" md="3">
-          <Button size="md" color="info">
+          <Button size="md" color={ActiveThemeColor}>
             <FaPlus /> User
           </Button>
         </Col>
@@ -122,7 +124,7 @@ const CustomerList = () => {
             <Row className="d-flex justify-content-between">
               <Col md="auto">Showing 7 of 7 Users</Col>
               <Col md="auto">
-                <Button color="info" className="btn-link">
+                <Button color={ActiveThemeColor} className="btn-link">
                   Download CSV
                 </Button>
               </Col>
@@ -137,7 +139,9 @@ const CustomerList = () => {
                   <FormGroup check>
                     <Label check>
                       <Input defaultChecked type="checkbox" />
-                      <span className="form-check-sign" />
+                      <span
+                        className={`form-check-sign bg-${ActiveThemeColor}`}
+                      />
                     </Label>
                   </FormGroup>
                 </th>
@@ -157,7 +161,10 @@ const CustomerList = () => {
                     <FormGroup check>
                       <Label check>
                         <Input defaultChecked type="checkbox" />
-                        <span className="form-check-sign" />
+                        <span
+                          className={`form-check-sign bg-${ActiveThemeColor}`}
+                          // style={{ backgroundColor: activeColor }}
+                        />
                       </Label>
                     </FormGroup>
                   </td>
@@ -166,7 +173,11 @@ const CustomerList = () => {
                   <td>{user.email}</td>
                   <td>
                     <Badge
-                      color={user.status === "Active" ? "primary" : "secondary"}
+                      color={
+                        user.status === "Active"
+                          ? ActiveThemeColor
+                          : "default"
+                      }
                     >
                       {user.status}
                     </Badge>

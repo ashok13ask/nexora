@@ -1,4 +1,4 @@
-import { CategoryScale, Legend, LinearScale, LineElement, PointElement, Tooltip } from "chart.js";
+import { useActiveColor } from "context/activeColor";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 import React from "react";
@@ -13,21 +13,12 @@ import {
   CardBody,
   CardHeader,
   CardTitle,
-  Col,
   FormGroup,
   Input,
-  Row,
 } from "reactstrap";
-// ChartJS.register(
-//   LineElement,
-//   CategoryScale,
-//   LinearScale,
-//   PointElement,
-//   Tooltip,
-//   Legend
-// );
 
 const AllUsers = () => {
+  const { ActiveThemeColor } = useActiveColor();
   const [range, setRange] = React.useState([
     {
       startDate: new Date(),
@@ -40,9 +31,9 @@ const AllUsers = () => {
     setIsOpen((prev) => ({ ...prev, main: !prev.main }));
   };
 
-  const toggleSub = () => {
-    setIsOpen((prev) => ({ ...prev, sub: !prev.sub }));
-  };
+  // const toggleSub = () => {
+  //   setIsOpen((prev) => ({ ...prev, sub: !prev.sub }));
+  // };
 
   const pickerRef = React.useRef(null);
 
@@ -130,7 +121,10 @@ const AllUsers = () => {
             <h4 className="mb-0 me-3 ms-3 d-block d-md-none ml-4">All Users</h4>
           </>
 
-          <Badge color="info" className="align-items-center ml-2 mt-2">
+          <Badge
+            color={ActiveThemeColor}
+            className="align-items-center ml-2 mt-2"
+          >
             PAST BEHAVIOR
           </Badge>
         </div>
@@ -140,7 +134,7 @@ const AllUsers = () => {
           <Button size="sm" color="secondary" className="me-2">
             Precompute Segment
           </Button>
-          <Button size="sm" color="info">
+          <Button size="sm" color={ActiveThemeColor}>
             Engage
           </Button>
         </div>

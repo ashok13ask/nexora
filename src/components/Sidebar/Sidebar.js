@@ -160,7 +160,7 @@ const Sidebar = (props) => {
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
     // if (!routes || !routes.length) return "Default";
-    console.log('rout',window.location.href.indexOf(routeName) > -1 ? "active" : "")
+    // console.log('rout',window.location.href.indexOf(routeName) > -1 ? "active" : "")
     return window.location.href.indexOf(routeName) > -1 ? "active" : "";
   };
 
@@ -230,7 +230,7 @@ const Sidebar = (props) => {
 };
 
 Sidebar.propTypes = {
-  activeColor: PropTypes.oneOf(["primary", "blue", "green", "orange", "red"]),
+  activeColor: PropTypes.oneOf(["primary", "blue", "green", "orange", "red",]),
   rtlActive: PropTypes.bool,
   routes: PropTypes.array.isRequired,
   logo: PropTypes.oneOfType([

@@ -20,7 +20,6 @@ import classnames from "classnames";
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   CardTitle,
@@ -33,8 +32,6 @@ import {
   Col,
   FormGroup,
   Label,
-  CardText,
-  CardSubtitle,
 } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 

@@ -54,8 +54,9 @@ import SMS from "views/campaigns/sms";
 import AllUsers from "views/segment/PastBehavior/allUsers";
 import FirstTime from "views/segment/liveSegment/firstTime";
 import CustomerList from "views/Customer/CustomerList";
-import CustomerProfile from "views/Customer";
 import FindPeople from "views/segment/FindPeople";
+import CustomerProfile from "views/Customer/CustomerProfile";
+import ViewSegment from "views/segment/ViewSegment";
 
 const routes = [
   {
@@ -564,6 +565,13 @@ const routes = [
     invisible: true,
     layout: "/admin",
     name: "Customer Detail",
+  },
+  {
+    path: "/segment/view",
+    component: <ViewSegment />,
+    invisible: true,
+    layout: "/admin",
+    name: "View Segment",
   },
 ];
 

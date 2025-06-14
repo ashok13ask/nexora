@@ -1,3 +1,4 @@
+import { useActiveColor } from "context/activeColor";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 import React from "react";
@@ -16,6 +17,7 @@ import {
 } from "reactstrap";
 
 const SMS = () => {
+  const { ActiveThemeColor } = useActiveColor();
   const buttonStyle = {
     padding: "8px 20px",
     fontSize: "0.75rem",
@@ -82,7 +84,7 @@ const SMS = () => {
           className="ms-md-auto d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-end gap-3 mt-3 mt-md-0"
         >
           <div className="d-flex justify-content-between col-12">
-            <Badge color="info">Running</Badge>
+            <Badge color={ActiveThemeColor}>Running</Badge>
 
             <div className="d-flex align-items-center gap-2">
               <BiStopCircle size={20} />
@@ -133,7 +135,9 @@ const SMS = () => {
             </div>
           </FormGroup>
         </Col>
-        <Col className="d-flex justify-content-start justify-content-md-end align-items-start text-info col-12 col-md-6">
+        <Col
+          className={`d-flex justify-content-start justify-content-md-end align-items-start text-${ActiveThemeColor} col-12 col-md-6`}
+        >
           <div>
             <b>Conversion event : Charged</b> in <b>5 days</b> <FaEdit />
           </div>

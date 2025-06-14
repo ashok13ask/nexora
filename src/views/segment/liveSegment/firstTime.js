@@ -12,10 +12,8 @@ import {
   CardBody,
   CardHeader,
   CardTitle,
-  Col,
   FormGroup,
   Input,
-  Row,
 } from "reactstrap";
 import "../../../assets/css/custom.css";
 
@@ -32,9 +30,9 @@ const FirstTime = () => {
     setIsOpen((prev) => ({ ...prev, main: !prev.main }));
   };
 
-  const toggleSub = () => {
-    setIsOpen((prev) => ({ ...prev, sub: !prev.sub }));
-  };
+  // const toggleSub = () => {
+  //   setIsOpen((prev) => ({ ...prev, sub: !prev.sub }));
+  // };
 
   const pickerRef = React.useRef(null);
 

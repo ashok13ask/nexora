@@ -23,18 +23,20 @@ import NotificationAlert from "react-notification-alert";
 
 // core components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import Footer from "components/Footer/Footer.js";
+// import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
 
 import logo from "assets/img/clientlogo.png";
+import Cookies from "js-cookie";
+import { useActiveColor } from "context/activeColor";
 
 var ps;
 
 const Admin = (props) => {
-  const [activeColor, setActiveColor] = React.useState("blue");
+  const {activeColor, setActiveColor, ActiveThemeColor} = useActiveColor();
   const [sidebarMini, setSidebarMini] = React.useState(true);
   const [opacity, setOpacity] = React.useState(0);
   const [sidebarOpened, setSidebarOpened] = React.useState(false);
@@ -48,6 +50,15 @@ const Admin = (props) => {
       mainPanelRef.current.scrollTop = 0;
     }
   }, [location]);
+  React.useEffect(() => {
+    const cookieValue = Cookies.get("fixedPlugin");
+    if (cookieValue) {
+      const decoded = JSON.parse(atob(cookieValue));
+      setActiveColor(decoded);
+    } else {
+      setActiveColor("blue");
+    }
+  }, [activeColor]);
   React.useEffect(() => {
     let innerMainPanelRef = mainPanelRef;
     if (navigator.platform.indexOf("Win") > -1) {
@@ -98,7 +109,12 @@ const Admin = (props) => {
       }
       if (prop.layout === "/admin") {
         return (
-          <Route path={prop.path} element={prop.component} key={key} exact />
+          <Route
+            path={prop.path}
+            element={prop.component}
+            key={key}
+            exact
+          />
         );
       } else {
         return null;
@@ -126,11 +142,15 @@ const Admin = (props) => {
     return activeRoute;
   };
   const handleActiveClick = (color) => {
+    const encodedData = btoa(JSON.stringify(color)); // ✅ Encode the string
+    Cookies.set("fixedPlugin", encodedData); // No need to wrap in JSON.stringify again
     setActiveColor(color);
   };
+
   const handleMiniClick = () => {
     let notifyMessage = "Sidebar mini ";
-    if (document.body.classList.contains("sidebar-mini")) {
+    const isMini = document.body.classList.contains("sidebar-mini");
+    if (isMini) {
       setSidebarMini(false);
       notifyMessage += "deactivated...";
     } else {
@@ -141,12 +161,14 @@ const Admin = (props) => {
     options = {
       place: "tr",
       message: notifyMessage,
-      type: "primary",
+      type: ActiveThemeColor,
       icon: "tim-icons icon-bell-55",
-      autoDismiss: 7,
+      autoDismiss: 2,
     };
     notificationAlertRef.current.notificationAlert(options);
     document.body.classList.toggle("sidebar-mini");
+    // const encodedData = btoa(JSON.stringify(isMini));
+    // Cookies.set("isMiniSideBar", encodedData);
   };
   const toggleSidebar = () => {
     setSidebarOpened(!sidebarOpened);
@@ -157,60 +179,60 @@ const Admin = (props) => {
     document.documentElement.classList.remove("nav-open");
   };
   return (
-    <div className="wrapper">
-      <div className="rna-container">
-        <NotificationAlert ref={notificationAlertRef} />
-      </div>
-      <div className="navbar-minimize-fixed" style={{ opacity: opacity }}>
-        <button
-          className="minimize-sidebar btn btn-link btn-just-icon"
-          onClick={handleMiniClick}
-        >
-          <i className="tim-icons icon-align-center visible-on-sidebar-regular text-muted" />
-          <i className="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted" />
-        </button>
-      </div>
-      <Sidebar
-        {...props}
-        routes={routes}
-        activeColor={activeColor}
-        logo={{
-          // outterLink: "https://www.creative-tim.com/",
-          text: "Nexora",
-          imgSrc: logo,
-        }}
-        closeSidebar={closeSidebar}
-      />
-      <div className="main-panel" ref={mainPanelRef} data={activeColor}>
-        <AdminNavbar
+      <div className="wrapper">
+        <div className="rna-container">
+          <NotificationAlert ref={notificationAlertRef} />
+        </div>
+        <div className="navbar-minimize-fixed" style={{ opacity: opacity }}>
+          <button
+            className="minimize-sidebar btn btn-link btn-just-icon"
+            onClick={handleMiniClick}
+          >
+            <i className="tim-icons icon-align-center visible-on-sidebar-regular text-muted" />
+            <i className="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted" />
+          </button>
+        </div>
+        <Sidebar
           {...props}
-          handleMiniClick={handleMiniClick}
-          brandText={getActiveRoute(routes)}
-          sidebarOpened={sidebarOpened}
-          toggleSidebar={toggleSidebar}
+          routes={routes}
+          activeColor={activeColor}
+          logo={{
+            // outterLink: "https://www.creative-tim.com/",
+            text: "Nexora",
+            imgSrc: logo,
+          }}
+          closeSidebar={closeSidebar}
         />
-        <Routes>
-          {getRoutes(routes)}
-          <Route
-            // path="/"
-            element={<Navigate to="/admin/dashboard" replace />}
+        <div className="main-panel" ref={mainPanelRef} data={activeColor}>
+          <AdminNavbar
+            {...props}
+            handleMiniClick={handleMiniClick}
+            brandText={getActiveRoute(routes)}
+            sidebarOpened={sidebarOpened}
+            toggleSidebar={toggleSidebar}
           />
-        </Routes>
-        {/* {
+          <Routes>
+            {getRoutes(routes)}
+            <Route
+              // path="/"
+              element={<Navigate to="/admin/dashboard" replace />}
+            />
+          </Routes>
+          {/* {
           // we don't want the Footer to be rendered on full screen maps page
           props?.location?.pathname?.indexOf("full-screen-map") !==
             -1 ? null : (
             <Footer fluid />
           )
         } */}
+        </div>
+        <FixedPlugin
+          activeColor={activeColor}
+          sidebarMini={sidebarMini}
+          handleActiveClick={handleActiveClick}
+          handleMiniClick={handleMiniClick}
+        />
       </div>
-      <FixedPlugin
-        activeColor={activeColor}
-        sidebarMini={sidebarMini}
-        handleActiveClick={handleActiveClick}
-        handleMiniClick={handleMiniClick}
-      />
-    </div>
   );
 };
 

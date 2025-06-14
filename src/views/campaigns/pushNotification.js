@@ -1,5 +1,5 @@
 import React from "react";
-import { FaCog, FaPlus, FaSave } from "react-icons/fa";
+import { FaCog, FaSave } from "react-icons/fa";
 import {
   Button,
   Card,

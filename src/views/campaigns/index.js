@@ -1,11 +1,12 @@
+import { useActiveColor } from "context/activeColor";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 import React from "react";
 import { DateRange } from "react-date-range";
+import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
-  ButtonGroup,
   Card,
   CardBody,
   CardHeader,
@@ -28,6 +29,7 @@ import {
 } from "reactstrap";
 
 const Campaigns = () => {
+  const { ActiveThemeColor } = useActiveColor();
   const [range, setRange] = React.useState([
     {
       startDate: new Date(),
@@ -173,16 +175,19 @@ const Campaigns = () => {
 
               {/* Button group - moves below on small screens */}
               <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 ">
-                <ButtonGroup className="col-md-12">
+                {/* <ButtonGroup className="col-md-12" color="info"> */}
                   <Button
-                    color="info"
+                  size="sm"
+                    color={ActiveThemeColor}
                     onClick={() => navigate("/admin/segment/insight")}
                   >
-                    <i className="tim-icons icon-simple-add" />
+                    <FaPlus/>
                     Subscribe to Reports
                   </Button>
-                  <UncontrolledDropdown>
-                    <DropdownToggle caret>Campaigns</DropdownToggle>
+                  <UncontrolledDropdown size="sm">
+                    <DropdownToggle caret color={ActiveThemeColor}>
+                      Campaigns
+                    </DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem header>Messaging Channel</DropdownItem>
                       <DropdownItem divider />
@@ -204,7 +209,7 @@ const Campaigns = () => {
                       <DropdownItem>Web Inbox</DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
-                </ButtonGroup>
+                {/* </ButtonGroup> */}
               </div>
             </CardHeader>
             <hr style={{ borderTop: "1px solid #ccc" }} />

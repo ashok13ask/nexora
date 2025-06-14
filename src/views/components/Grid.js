@@ -17,7 +17,7 @@
 import React from "react";
 
 // reactstrap components
-import { Card, CardBody, Row, Col,Collapse } from "reactstrap";
+import { Card, CardBody, Row, Col } from "reactstrap";
 
 const Grid = () => {
   return (

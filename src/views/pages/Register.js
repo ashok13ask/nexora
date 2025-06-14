@@ -20,10 +20,8 @@ import classnames from "classnames";
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
-  CardImg,
   CardTitle,
   Label,
   FormGroup,

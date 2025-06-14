@@ -1,7 +1,11 @@
+import SegmentTypeModal from "components/Modals/segmentTypeModal";
+import { useActiveColor } from "context/activeColor";
+import { useSegmentContext } from "context/SegementContext";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 import React from "react";
 import { DateRange } from "react-date-range";
+import { FaEllipsisV, FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
@@ -9,17 +13,20 @@ import {
   CardBody,
   CardHeader,
   Col,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
   FormGroup,
   Input,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
   Row,
   Table,
+  UncontrolledDropdown,
+  UncontrolledTooltip,
 } from "reactstrap";
 
 const SegmentList = () => {
+  const { ActiveThemeColor } = useActiveColor();
+  const { setSegmentModal } = useSegmentContext();
   const [range, setRange] = React.useState([
     {
       startDate: new Date(),
@@ -27,11 +34,8 @@ const SegmentList = () => {
       key: "selection",
     },
   ]);
-  const [modal, setModal] = React.useState(false);
-
-  const toggle = () => setModal(!modal);
-  const navigate = useNavigate();
   const pickerRef = React.useRef(null);
+  const navigate = useNavigate()
 
   const [showPicker, setShowPicker] = React.useState(false);
 
@@ -63,63 +67,7 @@ const SegmentList = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showPicker]);
-  const args = {
-    className: "my-custom-modal",
-    backdrop: "static",
-    size: "xl",
-  };
 
-  const segmentOptions = [
-    {
-      title: "Past Behavior Segment",
-      desc: "Segment users by property, past behavior, and interest",
-      icon: "📘", // replace with actual icon or SVG
-      color: "#E0F2FF",
-      onclick:()=>{navigate('/admin/segment/insight')}
-    },
-    {
-      title: "Live - User Actions",
-      desc: "Add users to segment when they do one or many events",
-      icon: "🔧",
-      color: "#E7FFF3",
-    },
-    {
-      title: "Live - Inaction in Time Frame",
-      desc: "Add users who do only one of two events in set time frame",
-      icon: "🛑",
-      color: "#E7FFF3",
-    },
-    {
-      title: "Live - On a Date or Time",
-      desc: "Add users to segment based on date or time",
-      icon: "📅",
-      color: "#E7FFF3",
-    },
-    {
-      title: "Live - Page Visit",
-      desc: "Add users to segment when they visit a specific page",
-      icon: "🌐",
-      color: "#F0E7FF",
-    },
-    {
-      title: "Live - Referrer Entry",
-      desc: "Add users to segment when referred by a website or campaign",
-      icon: "🔗",
-      color: "#E7FFF3",
-    },
-    {
-      title: "Live - Page Count",
-      desc: "Add users to segment based on count of pages visited",
-      icon: "📄",
-      color: "#E7FFF3",
-    },
-    {
-      title: "Custom - List Based",
-      desc: "Upload custom user list to create segment",
-      icon: "📁",
-      color: "#F3E6FF",
-    },
-  ];
   return (
     <div className="content">
       <h2>Segment</h2>
@@ -176,7 +124,10 @@ const SegmentList = () => {
               {/* Button group - moves below on small screens */}
               <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
                 <p className="mr-3 mb-0">Running Goals : 0/5</p>
-                <Button color="info" onClick={() => setModal(true)}>
+                <Button
+                  color={ActiveThemeColor}
+                  onClick={() => setSegmentModal(true)}
+                >
                   <i className="tim-icons icon-simple-add" />
                   <span className="d-none d-md-inline"> Segment</span>
                 </Button>
@@ -193,169 +144,62 @@ const SegmentList = () => {
                     <th>Created On</th>
                     <th>Updated On</th>
                     <th className="text-center">Updated By</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <FormGroup check>
-                        <div className="d-flex justify-content-between align-items-start w-100">
-                          <div className="d-flex align-items-start gap-2">
-                            <div className="text-start">
-                              {/* <Label check>
-                              <Input type="checkbox" />
-                              <span className="form-check-sign" />
-                            </Label> */}
-                              <h5 className="mb-1 ">Last ABC (30 days)</h5>
-                              <p className="mb-1">ID: 1234567</p>
-                              <p className="mb-0">Created by ak@gmail.com</p>
-                            </div>
+                  {[...Array(5)].map((_, index) => (
+                    <tr key={index}>
+                      <td className="w-25">
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h5 className="mb-1">Last ABC (30 days)</h5>
+                            <p className="mb-1">ID: 1234567</p>
+                            <p className="mb-0">Created by ak@gmail.com</p>
                           </div>
+                          <UncontrolledDropdown>
+                            <DropdownToggle tag="span" data-toggle="dropdown">
+                              <FaEllipsisV
+                                className="ml-2"
+                                style={{ cursor: "pointer" }}
+                              />
+                            </DropdownToggle>
+                            <DropdownMenu>
+                              <DropdownItem>Engage</DropdownItem>
+                              <DropdownItem>Clone</DropdownItem>
+                              <DropdownItem>Delete</DropdownItem>
+                            </DropdownMenu>
+                          </UncontrolledDropdown>
                         </div>
-                      </FormGroup>
-                    </td>
-                    <td>Past Behavior</td>
-                    <td>Apr 27, 2025</td>
-                    <td>NA</td>
-                    <td className="text-center">Na</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <FormGroup check>
-                        <div className="d-flex justify-content-between align-items-start w-100">
-                          <div className="d-flex align-items-start gap-2">
-                            <div className="text-start">
-                              {/* <Label check>
-                              <Input type="checkbox" />
-                              <span className="form-check-sign" />
-                            </Label> */}
-                              <h5 className="mb-1 ">Last ABC (30 days)</h5>
-                              <p className="mb-1">ID: 1234567</p>
-                              <p className="mb-0">Created by ak@gmail.com</p>
-                            </div>
-                          </div>
-                        </div>
-                      </FormGroup>
-                    </td>
-                    <td>Past Behavior</td>
-                    <td>Apr 27, 2025</td>
-                    <td>NA</td>
-                    <td className="text-center">Na</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <FormGroup check>
-                        <div className="d-flex justify-content-between align-items-start w-100">
-                          <div className="d-flex align-items-start gap-2">
-                            <div className="text-start">
-                              {/* <Label check>
-                              <Input type="checkbox" />
-                              <span className="form-check-sign" />
-                            </Label> */}
-                              <h5 className="mb-1 ">Last ABC (30 days)</h5>
-                              <p className="mb-1">ID: 1234567</p>
-                              <p className="mb-0">Created by ak@gmail.com</p>
-                            </div>
-                          </div>
-                        </div>
-                      </FormGroup>
-                    </td>
-                    <td>Past Behavior</td>
-                    <td>Apr 27, 2025</td>
-                    <td>NA</td>
-                    <td className="text-center">Na</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <FormGroup check>
-                        <div className="d-flex justify-content-between align-items-start w-100">
-                          <div className="d-flex align-items-start gap-2">
-                            <div className="text-start">
-                              {/* <Label check>
-                              <Input type="checkbox" />
-                              <span className="form-check-sign" />
-                            </Label> */}
-                              <h5 className="mb-1 ">Last ABC (30 days)</h5>
-                              <p className="mb-1">ID: 1234567</p>
-                              <p className="mb-0">Created by ak@gmail.com</p>
-                            </div>
-                          </div>
-                        </div>
-                      </FormGroup>
-                    </td>
-                    <td>Past Behavior</td>
-                    <td>Apr 27, 2025</td>
-                    <td>NA</td>
-                    <td className="text-center">Na</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <FormGroup check>
-                        <div className="d-flex justify-content-between align-items-start w-100">
-                          <div className="d-flex align-items-start gap-2">
-                            <div className="text-start">
-                              {/* <Label check>
-                              <Input type="checkbox" />
-                              <span className="form-check-sign" />
-                            </Label> */}
-                              <h5 className="mb-1 ">Last ABC (30 days)</h5>
-                              <p className="mb-1">ID: 1234567</p>
-                              <p className="mb-0">Created by ak@gmail.com</p>
-                            </div>
-                          </div>
-                        </div>
-                      </FormGroup>
-                    </td>
-                    <td>Past Behavior</td>
-                    <td>Apr 27, 2025</td>
-                    <td>NA</td>
-                    <td className="text-center">Na</td>
-                  </tr>
+                      </td>
+                      <td>Past Behavior</td>
+                      <td>Apr 27, 2025</td>
+                      <td>NA</td>
+                      <td className="text-center">Na</td>
+                      <td>
+                        <FaEye
+                          style={{ cursor: "pointer" }}
+                          id={`tooltip${index}`}
+                          size={20}
+                          onClick={()=>navigate('/admin/segment/view')}
+                        />
+                        <UncontrolledTooltip
+                          delay={0}
+                          target={`tooltip${index}`}
+                          // placement="down"
+                        >
+                          view
+                        </UncontrolledTooltip>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </CardBody>
           </Card>
         </Col>
       </Row>
-      <Modal isOpen={modal} toggle={toggle} {...args}>
-        <ModalHeader toggle={toggle}>
-          <span className="h3 mb-0">Create Segment</span>
-        </ModalHeader>
-        <ModalBody>
-          <Row>
-            {segmentOptions.map((option, idx) => (
-              <Col md="4" className="mb-1" key={idx}>
-                <Card
-                  style={{
-                    cursor: "pointer",
-                    borderRadius: "10px",
-                    backgroundColor: "#F9FAFB",
-                    boxShadow: "0 2px 5px rgba(0,0,0,0.05)",
-                  }}
-                  onClick={option?.onclick}
-                >
-                  <CardBody className="d-flex align-items-start gap-3">
-                    <div
-                      style={{
-                        backgroundColor: option.color,
-                        padding: "10px",
-                        borderRadius: "8px",
-                        fontSize: "20px",
-                      }}
-                    >
-                      {option.icon}
-                    </div>
-                    <div>
-                      <span className="h4 mb-1">{option.title}</span>
-                      <p className="text-muted small mb-0">{option.desc}</p>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </ModalBody>
-      </Modal>
+      <SegmentTypeModal />
     </div>
   );
 };
