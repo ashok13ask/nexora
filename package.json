@@ -1,16 +1,16 @@
 {
-  "name": "black-dashboard-pro-react",
+  "name": "nexora_app",
   "version": "1.2.4",
   "private": true,
-  "homepage": "https://demos.creative-tim.com/black-dashboard-pro-react/#/admin/dashboard",
+  "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
-    "compile-sass": "sass src/assets/scss/black-dashboard-pro-react.scss src/assets/css/black-dashboard-pro-react.css",
-    "minify-sass": "sass src/assets/scss/black-dashboard-pro-react.scss src/assets/css/black-dashboard-pro-react.min.css --style compressed"
+    "compile-sass": "sass src/assets/scss/nexora_app.scss src/assets/css/nexora_app.css",
+    "minify-sass": "sass src/assets/scss/nexora_app.scss src/assets/css/nexora_app.min.css --style compressed"
   },
   "dependencies": {
     "ajv": "^8.17.1",
