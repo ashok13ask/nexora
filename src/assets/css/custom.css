@@ -24,3 +24,78 @@
   border: 1px solid #ccc;
 }
 
+#card-hover {border: 1px solid #e0e0e0; /* Soft light gray */
+
+  border-radius: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+#card-hover:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+#custom-progress {
+  background-color: #f1f3f5; /* light background */
+  height: 6px;
+  border-radius: 50px;
+  border: none;             /* remove unwanted border */
+  box-shadow: none;         /* remove any inset shadow */
+  overflow: hidden;
+}
+
+#custom-progress .progress-bar {
+  background-color: #00d25b !important;
+  border-radius: 50px;
+  box-shadow: none;
+}
+
+#navigation-bar-container {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 2rem;
+}
+
+#custom-nav-tabs {
+  border-bottom: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+#custom-nav-tabs .nav-item {
+  margin: 0;
+}
+
+#custom-nav-link {
+  color: #9ca3af !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 1rem 1.5rem !important;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+  border-radius: 0 !important;
+  margin: 0;
+}
+
+#custom-nav-link:hover {
+  color: #6b7280 !important;
+  background: transparent !important;
+}
+
+#custom-nav-link.active {
+  color: #374151 !important;
+  background: transparent !important;
+  font-weight: 600;
+}
+
+#custom-nav-link:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}

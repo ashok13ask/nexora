@@ -29,14 +29,15 @@ import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
 
-import logo from "assets/img/clientlogo.png";
+import logo from "assets/img/en_full_logo.png";
+
 import Cookies from "js-cookie";
 import { useActiveColor } from "context/activeColor";
 
 var ps;
 
 const Admin = (props) => {
-  const {activeColor, setActiveColor, ActiveThemeColor} = useActiveColor();
+  const { activeColor, setActiveColor, ActiveThemeColor } = useActiveColor();
   const [sidebarMini, setSidebarMini] = React.useState(true);
   const [opacity, setOpacity] = React.useState(0);
   const [sidebarOpened, setSidebarOpened] = React.useState(false);
@@ -109,12 +110,7 @@ const Admin = (props) => {
       }
       if (prop.layout === "/admin") {
         return (
-          <Route
-            path={prop.path}
-            element={prop.component}
-            key={key}
-            exact
-          />
+          <Route path={prop.path} element={prop.component} key={key} exact />
         );
       } else {
         return null;
@@ -178,61 +174,64 @@ const Admin = (props) => {
     setSidebarOpened(false);
     document.documentElement.classList.remove("nav-open");
   };
+  React.useEffect(() => {
+    document.body.classList.add("white-content"); // Remove dark mode class on load  
+    document.body.classList.remove("sidebar-mini"); // ✅ Ensure sidebar is open
+  }, []);
   return (
-      <div className="wrapper">
-        <div className="rna-container">
-          <NotificationAlert ref={notificationAlertRef} />
-        </div>
-        <div className="navbar-minimize-fixed" style={{ opacity: opacity }}>
-          <button
-            className="minimize-sidebar btn btn-link btn-just-icon"
-            onClick={handleMiniClick}
-          >
-            <i className="tim-icons icon-align-center visible-on-sidebar-regular text-muted" />
-            <i className="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted" />
-          </button>
-        </div>
-        <Sidebar
+    <div className="wrapper">
+      <div className="rna-container">
+        <NotificationAlert ref={notificationAlertRef} />
+      </div>
+      <div className="navbar-minimize-fixed" style={{ opacity: opacity }}>
+        <button
+          className="minimize-sidebar btn btn-link btn-just-icon"
+          onClick={handleMiniClick}
+        >
+          <i className="tim-icons icon-align-center visible-on-sidebar-regular text-muted" />
+          <i className="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted" />
+        </button>
+      </div>
+      <Sidebar
+        {...props}
+        routes={routes}
+        activeColor={activeColor}
+        logo={{
+          text: "Nexora",
+          imgSrc: logo,
+        }}
+        closeSidebar={closeSidebar}
+      />
+      <div className="main-panel" ref={mainPanelRef} data={activeColor}>
+        <AdminNavbar
           {...props}
-          routes={routes}
-          activeColor={activeColor}
-          logo={{
-            // outterLink: "https://www.creative-tim.com/",
-            text: "Nexora",
-            imgSrc: logo,
-          }}
-          closeSidebar={closeSidebar}
+          handleMiniClick={handleMiniClick}
+          brandText={getActiveRoute(routes)}
+          sidebarOpened={sidebarOpened}
+          toggleSidebar={toggleSidebar}
         />
-        <div className="main-panel" ref={mainPanelRef} data={activeColor}>
-          <AdminNavbar
-            {...props}
-            handleMiniClick={handleMiniClick}
-            brandText={getActiveRoute(routes)}
-            sidebarOpened={sidebarOpened}
-            toggleSidebar={toggleSidebar}
+        <Routes>
+          {getRoutes(routes)}
+          <Route
+            // path="/"
+            element={<Navigate to="/admin/dashboard" replace />}
           />
-          <Routes>
-            {getRoutes(routes)}
-            <Route
-              // path="/"
-              element={<Navigate to="/admin/dashboard" replace />}
-            />
-          </Routes>
-          {/* {
+        </Routes>
+        {/* {
           // we don't want the Footer to be rendered on full screen maps page
           props?.location?.pathname?.indexOf("full-screen-map") !==
             -1 ? null : (
             <Footer fluid />
           )
         } */}
-        </div>
-        <FixedPlugin
-          activeColor={activeColor}
-          sidebarMini={sidebarMini}
-          handleActiveClick={handleActiveClick}
-          handleMiniClick={handleMiniClick}
-        />
       </div>
+      <FixedPlugin
+        activeColor={activeColor}
+        sidebarMini={sidebarMini}
+        handleActiveClick={handleActiveClick}
+        handleMiniClick={handleMiniClick}
+      />
+    </div>
   );
 };
 

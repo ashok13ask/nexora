@@ -93,7 +93,7 @@ const CustomerList = () => {
     },
   ];
   return (
-    <div className="content">
+    <div className="content" style={{fontFamily:'Roboto, san-serif'}}>
       <Row className="mt-3">
         <Col className="col-md-3" md="3">
           <div ref={wrapperRef}>

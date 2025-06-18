@@ -57,6 +57,7 @@ import CustomerList from "views/Customer/CustomerList";
 import FindPeople from "views/segment/FindPeople";
 import CustomerProfile from "views/Customer/CustomerProfile";
 import ViewSegment from "views/segment/ViewSegment";
+import SchemaEvents from "views/Schema/SchemaEvents";
 
 const routes = [
   {
@@ -86,42 +87,6 @@ const routes = [
             path: "/analytics/event",
             component: <Events />,
           },
-          // {
-          //   name: "Funnels",
-          //   path: "#",
-          //   layout: "/admin",
-          //   mini: "F",
-          // },
-          // {
-          //   name: "Cohorts",
-          //   path: "#",
-          //   layout: "/admin",
-          //   mini: "C",
-          // },
-          // {
-          //   name: "Trends",
-          //   path: "#",
-          //   layout: "/admin",
-          //   mini: "T",
-          // },
-          // {
-          //   name: "Pivots",
-          //   path: "#",
-          //   layout: "/admin",
-          //   mini: "P",
-          // },
-          // {
-          //   name: "Flows",
-          //   path: "#",
-          //   layout: "/admin",
-          //   mini: "F",
-          // },
-          // {
-          //   name: "Real Impact",
-          //   path: "#",
-          //   layout: "/admin",
-          //   mini: "E",
-          // },
         ],
       },
 
@@ -176,13 +141,28 @@ const routes = [
         layout: "/admin",
         component: <Journey />,
       },
-      //  {
-      //   name: "Grid",
-      //   mini: "G",
-      //   path: "/grid",
-      //   layout: "/admin",
-      //   component: <Grid />,
-      // },
+    ],
+  },
+  {
+    collapse: true,
+    name: "Schema",
+    icon: "tim-icons icon-email-85",
+    state: "schemaCollapse",
+    views: [
+      {
+        name: "Events",
+        mini: "E",
+        layout: "/admin",
+        path: "/schema/events",
+        component: <SchemaEvents />,
+      },
+      {
+        name: "User properties",
+        mini: "UP",
+        path: "/schema/user-properties",
+        layout: "/admin",
+        component: <Journey />,
+      },
     ],
   },
   {

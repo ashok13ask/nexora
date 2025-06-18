@@ -15,7 +15,7 @@ const CustomerProfile = () => {
   };
 
   return (
-    <div className="content">
+    <div className="content" style={{fontFamily:'Roboto,san-serif'}}>
       <ButtonGroup className="d-flex mb-4" size="md">
         {["profile", "activity", "engagement"].map((tab) => (
           <Button

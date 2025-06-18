@@ -23,6 +23,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 
 // reactstrap components
 import { Nav, Collapse } from "reactstrap";
+import clientLogo from "../../assets/img/en_full_logo.png";
 
 var ps;
 
@@ -108,7 +109,7 @@ const Sidebar = (props) => {
               {prop.icon !== undefined ? (
                 <>
                   <i className={prop.icon} />
-                  <p>
+                  <p style={{ fontSize: "13px", fontWeight: 400 }}>
                     {rtlActive ? prop.rtlName : prop.name}
                     <b className="caret" />
                   </p>
@@ -118,7 +119,10 @@ const Sidebar = (props) => {
                   <span className="sidebar-mini-icon">
                     {rtlActive ? prop.rtlMini : prop.mini}
                   </span>
-                  <span className="sidebar-normal">
+                  <span
+                    className="sidebar-normal"
+                    style={{ fontSize: "13px", fontWeight: 400 }}
+                  >
                     {rtlActive ? prop.rtlName : prop.name}
                     <b className="caret" />
                   </span>
@@ -139,14 +143,19 @@ const Sidebar = (props) => {
             {prop.icon !== undefined ? (
               <>
                 <i className={prop.icon} />
-                <p>{rtlActive ? prop.rtlName : prop.name}</p>
+                <p style={{ fontSize: "13px", fontWeight: 400 }}>
+                  {rtlActive ? prop.rtlName : prop.name}
+                </p>
               </>
             ) : (
               <>
                 <span className="sidebar-mini-icon">
                   {rtlActive ? prop.rtlMini : prop.mini}
                 </span>
-                <span className="sidebar-normal">
+                <span
+                  className="sidebar-normal"
+                  style={{ fontSize: "13px", fontWeight: 400 }}
+                >
                   {rtlActive ? prop.rtlName : prop.name}
                 </span>
               </>
@@ -214,15 +223,33 @@ const Sidebar = (props) => {
       );
     }
   }
+  console.log(logoImg);
   return (
-    <div className="sidebar" data={activeColor}>
-      <div className="sidebar-wrapper" ref={sidebarRef}>
-        {logoImg !== null || logoText !== null ? (
+    <div
+      className="sidebar"
+      data={activeColor}
+      style={{ textTransform: "capitalize" }}
+    >
+      {/* <div className="sidebar-wrapper" ref={sidebarRef}>
+        {/* {logoImg !== null || logoText !== null ? (
           <div className="logo">
             {logoImg}
-            {logoText}
+            {/* {logoText} 
           </div>
-        ) : null}
+        ) : null} 
+        <img src={clientLogo} alt="Nexora" style={{width:'150px'}}/>
+        <Nav>{createLinks(props.routes)}</Nav>
+      </div> */}
+      <div className="sidebar-wrapper" ref={sidebarRef}>
+        <div
+          style={{ textAlign: "center", padding: "10px 0", marginTop: "20px" }}
+        >
+          <img src={clientLogo} alt="Nexora" style={{ width: "150px" }} />
+        </div>
+        <hr
+          style={{ height: "0.3px", backgroundColor: "#ccc", border: "none" }}
+        />
+
         <Nav>{createLinks(props.routes)}</Nav>
       </div>
     </div>
@@ -230,7 +257,7 @@ const Sidebar = (props) => {
 };
 
 Sidebar.propTypes = {
-  activeColor: PropTypes.oneOf(["primary", "blue", "green", "orange", "red",]),
+  activeColor: PropTypes.oneOf(["primary", "blue", "green", "orange", "red"]),
   rtlActive: PropTypes.bool,
   routes: PropTypes.array.isRequired,
   logo: PropTypes.oneOfType([

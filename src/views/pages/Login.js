@@ -20,6 +20,7 @@ import classnames from "classnames";
 import {
   Button,
   Card,
+  CardHeader,
   CardBody,
   CardFooter,
   CardTitle,
@@ -32,6 +33,8 @@ import {
   Col,
   FormGroup,
   Label,
+  CardText,
+  CardSubtitle,
 } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -91,7 +94,7 @@ const Login = () => {
                     className={classnames({
                       "input-group-focus": state.passFocus,
                     })}
-                   >
+                  >
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
                         <i className="tim-icons icon-lock-circle" />

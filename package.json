@@ -13,6 +13,7 @@
     "minify-sass": "sass src/assets/scss/black-dashboard-pro-react.scss src/assets/css/black-dashboard-pro-react.min.css --style compressed"
   },
   "dependencies": {
+    "@tanstack/react-table": "^8.21.3",
     "ajv": "^8.17.1",
     "autoprefixer": "10.4.20",
     "bootstrap": "4.6.2",
